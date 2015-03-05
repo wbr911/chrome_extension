@@ -1,0 +1,61 @@
+.any{
+background-color: lightblue;
+}
+
+.canHide{
+background-color: yellow;
+}
+
+.value{
+background-color: lightgreen;
+}
+
+.selectionBorder{
+border: 1px solid red !important;
+}
+
+.hoverBorder{
+border: 1px solid;
+}
+
+.selectionBackground{
+background-color: #E6E6FA;
+}
+
+#selectionBox{
+        position:absolute;
+    //    background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #ff4f02), color-stop(1, #8f2c00));
+        border:1px dashed #f00;
+        width:0;
+        height:0;
+        opacity:0.5;
+		
+    }
+	
+#selectionBox:focus{
+	cursor:default;
+}
+
+.ui-dialog{
+	width: 70% !important;
+	height: 60% !important;
+}
+
+#result-dialog{
+	text-align:center;
+}
+
+#layout-result{
+	width: 100% !important;
+	height: 535px;
+	
+}
+
+:not(#result-dialog){
+	-webkit-user-select: none;
+}
+
+
+
+/* ::-moz-selection {background: transparent; }
+::selection      {background: transparent; } */

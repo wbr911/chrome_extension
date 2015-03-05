@@ -1,0 +1,25 @@
+{
+    "name": "First",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "First extension",
+    "background": {
+        "scripts": ["test.js"]
+    },    
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },    
+    "content_scripts": [ {
+        "js": ["lib/jquery-1.9.0.js", "lib/jquery-ui-1.11.2/jquery-ui.min.js", "content_script.js"  ],
+		"css":["jquery-ui-1.11.2/jquery-ui.min.css", "content.css"],
+        "matches": [ "<all_urls>"]
+    } ],
+
+	"web_accessible_resources": [
+    "icon.png","content.css"
+  ],
+    "permissions" : [
+        "tabs","<all_urls>"
+            ]
+}
