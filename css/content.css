@@ -1,0 +1,77 @@
+.mq-close{
+    float:right;
+    clear: both;
+    background-image: url("chrome-extension://aanhmophikfpipeafjmifhnppfjgameh/images/icon-close.png");
+}
+#hoverDropdown{
+    position: absolute;
+    background-color: lightgrey;
+    border: 3px solid  #0f3e6a;
+    padding: 5px;
+    -webkit-border-radius:3px;
+    width: 250px;
+    height: 150px;
+}
+#hoverBlock{
+    position: absolute;
+    opacity: 0.7;
+    background-color: #12487b;
+    border:1px solid #0f3e6a;
+    -webkit-border-radius:2px;
+}
+.any{
+background-color: lightblue;
+}
+
+.canHide{
+background-color: yellow;
+}
+
+.magicPasteTargetValue{
+background-color: lightgreen;
+}
+
+.selectionBorder{
+border: 1px solid red !important;
+}
+
+.hoverBorder{
+border: 1px solid;
+}
+
+.selectionBackground{
+background-color: #E6E6FA;
+}
+
+#selectionBox{
+        position:absolute;
+    //    background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #ff4f02), color-stop(1, #8f2c00));
+        border:1px dashed #f00;
+        width:0;
+        height:0;
+        opacity:0.5;
+		
+    }
+	
+#selectionBox:focus{
+	cursor:default;
+}
+
+.ui-dialog{
+	width: 70% !important;
+	height: 60% !important;
+}
+
+#result-dialog{
+	text-align:center;
+}
+
+#layout-result{
+	width: 100% !important;
+	height: 535px;
+	
+}
+
+
+/* ::-moz-selection {background: transparent; }
+::selection      {background: transparent; } */

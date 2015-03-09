@@ -1,25 +1,22 @@
 {
-    "name": "First",
+    "name": "MagicPasteChromeTool",
     "version": "1.0",
     "manifest_version": 2,
     "description": "First extension",
-    "background": {
-        "scripts": ["test.js"]
-    },    
     "browser_action": {
-        "default_icon": "icon.png",
+        "default_icon": "images/icon.png",
         "default_popup": "popup.html"
     },    
     "content_scripts": [ {
-        "js": ["lib/jquery-1.9.0.js", "lib/jquery-ui-1.11.2/jquery-ui.min.js", "content_script.js"  ],
-		"css":["jquery-ui-1.11.2/jquery-ui.min.css", "content.css"],
+        "js": ["lib/jquery-1.11.2.js", "content_script.js"  ],
+		"css":["lib/jquery-ui-1.11.2/jquery-ui.min.css", "css/content.css"],
         "matches": [ "<all_urls>"]
     } ],
 
 	"web_accessible_resources": [
-    "icon.png","content.css"
+    "images/*","css/*"
   ],
     "permissions" : [
-        "tabs","<all_urls>"
+        "http://*/*","https://*/*","activeTab"
             ]
 }
