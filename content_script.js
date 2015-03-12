@@ -5,8 +5,7 @@ var textNodesElements=[];
 var regionSelected = false;
 var candidateRegionSelected=false;
 var isInputSomething = false;
-var selectBox,selectionButton,generateButton,cancelButton,buttonbar,hoverBlock,hoverDropdown;
-
+var selectBox,selectionButton,generateButton,cancelButton,buttonbar;
 function selectTheBoundary() {
 
     initElement();
@@ -27,6 +26,7 @@ function initElement() {
         buttonbar.hide();
         regionSelected = false;
         $(".selectionBackground").removeClass("selectionBackground");
+        $(".mp-selectable").removeClass("mp-selectable");
         // unbind event
         $.each(textNodesElements,function(i,element){
             element.unbind("mouseenter");
@@ -64,40 +64,7 @@ function initElement() {
             selectionAncestorRegion = node;
         }
     });
-
-    hoverBlock = $("<div id='hoverBlock'></div>").hide().appendTo($(document.body));
-    hoverBlock.click(toggleDropdown);
-    hoverBlock.bind("mouseleave",mouseLeave);
-
-    hoverDropdown = $("<div id='hoverDropdown'>" +
-    "<span class='mq-close'></span>" +
-    "<table>" +
-    "<tr><td>value</td><td><input id='mp-textValue'/></td></tr>" +
-    "<tr><td>targetID</td><td><input id='mp-targetId'></td></tr>" +
-    "</table>" +
-    "<div class='mp-buttonBar'><button id='mp-update'>update</button> <button id='mp-delete'>delete</button></div>" +
-    "</div>").hide().appendTo($(document.body));
-
-    $("#hoverDropdown>.ui-icon-close").click(function(){
-        $('#hoverDropdown').slideUp(200);
-    })
-
-
 }
-function toggleDropdown(e){
-    if(hoverDropdown.css('display')==='block'){
-        hoverDropdown.slideUp(200);
-        return;
-    }
-    var offset =$(e.target).offset();
-    var width = $(e.target).width();
-    var height = $(e.target).height();
-    var left = offset.left+width/2-hoverDropdown.width()/2;
-    hoverDropdown.css("left",left>=0?left:0);
-    hoverDropdown.css("top",offset.top+height+2);
-    hoverDropdown.slideDown(200);
-}
-
 function generateLayoutDefinition() {
     var clonedSelectionRegion = $(selectionAncestorRegion).clone();
 
@@ -185,10 +152,13 @@ function registerInsideRegionElementEvent(selectionRegionElement) {
 
 function registerInsideRegionEvent() {
     makeSelectionRegion();
-    var length = selectionRegion.length;
+    $("html").css("-webkit-user-select","none");
+    $(".selectionBackground").addClass("mp-selectable");
+    // used for hover selection
+   /* var length = selectionRegion.length;
     for (var i = 0; i < length; i++) {
         registerInsideRegionElementEvent(selectionRegion[i]);
-    }
+    }*/
 }
 
 function makeSelectionRegion() {
@@ -267,9 +237,18 @@ function registerSelectionBox() {
             isDragging = false;
             isPressed = false;
         }
+        if(regionSelected){
+            var selection=document.getSelection();
+            if(selection.rangeCount!==0){
+                showTargtePopoverMenu(selecton.getRangeAt(0));
+            }
+        }
     });
 }
 
+function draggingSelection(e){
+    document.getSelection().getRangeAt(0).cloneContents();
+}
 function highlightSelectionElements(startX, startY, endX, endY) {
     if (startX > endX) {
         var temp = endX;
@@ -295,64 +274,10 @@ function mouseEnter(event) {
     var width = $(event.target).width();
     var height = $(event.target).height();
     var offset = $(event.target).offset();
-    hoverBlock.css("left",offset.left);
-    hoverBlock.css("top",offset.top);
-    hoverBlock.css("width",width);
-    hoverBlock.css("height",height);
-    hoverBlock.show();
-    hoverDropdown.find("#mp-textValue").val($(event.target).html());
     event.stopPropagation();
-    /* if (isInputSomething) {
-     return;
-     }
-
-     var $ignoreButton = $("<button id='ignore'>ignore</button>");
-     var $valueButton = $("<button id='value'>value</button>");
-     var $targetItemArea = $("<input id='target-item' placeholder='target-item id'></input>");
-     currentElement = event.target;
-     var currentClass = $(currentElement).attr("class");
-
-     //read value input before
-     if(currentClass === "magicPasteTargetValue" && $(currentElement).attr("target-item")){
-     $targetItemArea.val($(currentElement).attr("target-item"));
-     }
-
-     $(document.body).append($valueButton);
-     $(document.body).append($targetItemArea);
-     isInputSomething = false;
-     $('#ignore').click(function (event) {
-
-     $(currentElement).attr("class", "any");
-     });
-     $('#value').click(function (event) {
-
-     var $targetItemInputElement = $("#target-item");
-     $(currentElement).attr("class", "magicPasteTargetValue");
-     $(currentElement).attr("target-item", $targetItemInputElement.val());
-
-     });
-     $('#target-item').focus(function (event) {
-     isInputSomething = true;
-     });
-     var offset = $(event.target).offset();
-     $ignoreButton.css("position", "absolute");
-     $ignoreButton.css("left", offset.left - $ignoreButton.width() - 10);
-     $ignoreButton.css("top", offset.top - 5);
-     $ignoreButton.css("opacity", "0.7");
-     $valueButton.css("position", "absolute");
-     $valueButton.css("left", offset.left + $(event.target).width());
-     $valueButton.css("top", offset.top - 5);
-     $valueButton.css("opacity", "0.7");
-     $targetItemArea.css("position", "absolute");
-     $targetItemArea.css("left", offset.left + $(event.target).width() + $valueButton.width() + 15);
-     $targetItemArea.css("top", offset.top - 5);
-
-     $(event.target).addClass("hoverBorder");
-     */
 
 }
 function mouseLeave(event) {
-    hoverBlock.hide();
     $(event.target).removeClass("hoverBorder");
     event.stopPropagation();
 

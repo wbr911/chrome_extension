@@ -8,11 +8,10 @@
         "default_popup": "popup.html"
     },    
     "content_scripts": [ {
-        "js": ["lib/jquery-1.11.2.js", "content_script.js"  ],
+        "js": ["lib/jquery-1.11.2.js","lib/rangy-core.js","lib/rangy-classapplier.js","js/MarkApplier.js","js/TargetIdPopover.js" ,"js/TargetIdRecordList.js","content_script.js"  ],
 		"css":["lib/jquery-ui-1.11.2/jquery-ui.min.css", "css/content.css"],
         "matches": [ "<all_urls>"]
     } ],
-
 	"web_accessible_resources": [
     "images/*","css/*"
   ],
