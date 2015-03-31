@@ -41,12 +41,12 @@ $(function () {
         selectionButton = $("<button id='selection' class='mp-btn'>select region</button>").hide();
         generateButton = $("<button id='generate'class='mp-btn'>generate</button>").hide();
         cancelButton = $("<button id='cancel'class='mp-btn'>cancel</button>").hide();
-        buttonBar = $("<div id='buttonBar'></div>").append(selectionButton).append(generateButton).append(cancelButton).appendTo($(document.body));
         markApplier = new mp.MarkApplier();
         targetIdRecordList = new mp.TargetIdRecordList(markApplier);
         targetIdPopover = new mp.TargetIdPopover(markApplier);
         targetIdPopover.setTargetIdRecordList(targetIdRecordList);
         targetIdRecordList.setPopover(targetIdPopover);
+        buttonBar = $("<div id='buttonBar'></div>").append(selectionButton).append(generateButton).append(cancelButton).appendTo(targetIdRecordList.getContainer());
         layoutDefinitionService = new mp.service.LayoutDefinitionService();
         layoutDefinitionDialog = new mp.LayoutDefinitionDialog(layoutDefinitionService);
         generateButton.click(function (e) {

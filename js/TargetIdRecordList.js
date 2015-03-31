@@ -103,5 +103,8 @@ mp.TargetIdRecordList.prototype.showListMenu = function (left, top) {
     this.container.css("top", top);
     this.container.show();
 };
+mp.TargetIdRecordList.prototype.getContainer = function () {
+    return this.container;
+};
 
 

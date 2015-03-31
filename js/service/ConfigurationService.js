@@ -167,5 +167,36 @@ mp.service.ConfigurationService.prototype.notifyNetworkError = function (ajaxArg
 mp.service.ConfigurationService.prototype.saveStatus = function(){
     chrome.storage.sync.set({'service': {value:this.currentServce}}, function() {});
 };
-
+/**
+ *
+ * @param {function(name)}callback
+ */
+mp.service.ConfigurationService.prototype.getDefinitionName = function(callback){
+    chrome.tabs.getCurrent(function(tab){
+        var url = tab.url.substring(0,tab.url.indexOf("?"));
+        console.log(url);
+        callback.call(this , url);
+       /* $.ajax({
+            type: "get",
+            url: mp.service.Constants.BASE_URL + "/definitionIndex/"+url,
+            data: "service=" + serviceName,
+            dataType: "string",
+            async: async,
+            success: function (data) {
+                if (callback) {
+                    callback.call(window, data);
+                }
+            },
+            error: function (data) {
+                self.hasErrorStatus = true;
+                self.notifyNetworkError(arguments ,  "failed to get definition name index from server , connection is refused");
+                if (callback) {
+                    callback.call(window, "error");
+                }
+                console.log("failed to get definition name index from server");
+            }
+        });*/
+    });
+};
 mp.service.configureService = new mp.service.ConfigurationService();
+
