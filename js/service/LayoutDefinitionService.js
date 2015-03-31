@@ -24,7 +24,7 @@ mp.service.LayoutDefinitionService.prototype.upload = function(layoutDef , callb
                 console.log("success");
                 callback.call(this,mp.service.LayoutDefinitionService.SAVE_DEFINITION_SUCCESS);
             }else{
-                if(arguments[0].responseText.indexOf("<!DOCTYPE html>")===0){
+                if(res.indexOf("<!DOCTYPE html>")===0){
                     callback.call(this,"you need to log in hue first or the session is out of time")
                 }
                 console.log("failure");

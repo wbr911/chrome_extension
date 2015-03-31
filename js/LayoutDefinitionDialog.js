@@ -101,6 +101,8 @@ mp.LayoutDefinitionDialog.prototype.showUploadStatusPanel = function(status){
     this.uploadStatusPanel.css("top",0 - this.uploadStatusPanel.outerHeight());
     this.uploadStatusPanel.show();
     this.uploadStatusPanel.animate({top:0},700);
+    var self = this;
+    setTimeout(function(){self.uploadStatusPanel.animate({"top":0 - self.uploadStatusPanel.outerHeight()} , 700)} , 4000);
 };
 mp.LayoutDefinitionDialog.prototype.setLayoutDefinitionStr = function(definitionStr){
     this.defintionTextArea.text(definitionStr);

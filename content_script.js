@@ -153,8 +153,7 @@ $(function () {
         var brClosePattern = new RegExp(brClosePatternString, "g");
         var newLinePattern = new RegExp("\n", "g");
         var anyPattern = new RegExp("(<any></any>)+", "g");
-
-        result = $(clonedSelectionRegion).html().replace(/(<img\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brPattern, "<br/>").replace(/(<col\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brClosePattern, "");
+        result = $(clonedSelectionRegion).html().replace(/\sclass=""/ig,"").replace(/(<img\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brPattern, "<br/>").replace(/(<col\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brClosePattern, "");
         result = result.replace(newLinePattern, "");
         result = result.replace(anyPattern, "<any></any>");
         //layoutDefinitionDialog.setLayoutDefinitionStr(formatForIndent(result));
@@ -355,7 +354,6 @@ $(function () {
         event.stopPropagation();
 
     }
-
     function formatForIndent(xml) {
         var formatted = '';
         var reg = /(>)(<)(\/*)/g;
