@@ -6,3 +6,4 @@ mp.service.Constants.BASE_URL  = mp.service.Constants.BASE+"/tool/chromeextensio
 mp.service.Constants.LOGIN_URL = mp.service.Constants.BASE+"hue/login";
 mp.service.Constants.COMMAND_ALL_SERVICE_NAME = "all_service";
 mp.service.Constants.COMMAND_ITEM_LIST = "itemList";
+mp.service.Constants.COMMAND_DEFINITION_INDEX = "definition_index";

@@ -14,12 +14,17 @@ mp.LayoutDefinitionDialog = function(layoutDefinitionService){
      * @private
      */
     this.serviceName = "";
-    this.initElement();
-    this.enterDocument();
+    /**
+     *
+     * @type {mp.service.ConfigurationService}
+     */
+    this.configureService = {};
+    var self = this;
 };
 mp.LayoutDefinitionDialog.UPLOAD_STATUS_SUCCESS = "success";
 
 mp.LayoutDefinitionDialog.prototype.initElement = function(){
+    var self  = this;
     this.dialog = $("<div class='mp-floatBlock-large' id='mp-layoutDefinitionDialog'>" +
     "<div class='mp-header mp-draggable'>Layout Definition </div>" +
     "<span id='mp-layoutDefinitionDialog-closeBtn' class='mp-icon mp-icon-right-corner mp-icon-close-grey'></span>" +
@@ -46,6 +51,7 @@ mp.LayoutDefinitionDialog.prototype.initElement = function(){
      * @private
      */
     this.descriptionInput = this.dialog.find("#mp-layoutDefinitionDialog-descriptionInput");
+
 
 };
 /**

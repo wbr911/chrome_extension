@@ -40,10 +40,11 @@ mp.TargetIdPopover.prototype.initElement = function () {
 /**
  * @private
  */
-mp.TargetIdPopover.prototype.fetchItemList = function(){
+mp.TargetIdPopover.prototype.fetchItemList = function(callback){
     var self = this;
     chrome.runtime.sendMessage({command:mp.service.Constants.COMMAND_ITEM_LIST},function(response){
         self.setData(response.data);
+        if(callback){callback.call(this)}
     });
 };
 mp.TargetIdPopover.prototype.enterDocument = function () {
@@ -84,19 +85,21 @@ mp.TargetIdPopover.prototype.setData = function (dataArray) {
 };
 
 mp.TargetIdPopover.prototype.showPopoverMenuUnderSelectedNodes = function () {
-    this.fetchItemList();
-    var left, top;
-    var endContainer = document.getSelection().getRangeAt(0).endContainer;
-    if (endContainer.nodeType == 3) {
-        endContainer = endContainer.parentNode;
-    }
-    $endContainer = $(endContainer);
-    var baseOffset = $endContainer.offset();
-    left = ($endContainer.width() / 2 + baseOffset.left) - this.popoverContainer.width() / 2;
-    top = $endContainer.height() + baseOffset.top;
-    this.popoverContainer.css("left", left);
-    this.popoverContainer.css("top", top);
-    this.popoverContainer.slideDown(200);
+    this.fetchItemList(function(){
+        var left, top;
+        var endContainer = document.getSelection().getRangeAt(0).endContainer;
+        if (endContainer.nodeType == 3) {
+            endContainer = endContainer.parentNode;
+        }
+        $endContainer = $(endContainer);
+        var baseOffset = $endContainer.offset();
+        left = ($endContainer.width() / 2 + baseOffset.left) - this.popoverContainer.width() / 2;
+        top = $endContainer.height() + baseOffset.top;
+        this.popoverContainer.css("left", left);
+        this.popoverContainer.css("top", top);
+        this.popoverContainer.slideDown(200);
+    });
+
 };
 /**
  * @private
