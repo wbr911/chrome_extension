@@ -1,0 +1,8 @@
+#mp-serviceLabel{
+    position: relative;
+}
+#mp-serviceList{
+    overflow-y: scroll;
+    max-height: 150px;
+    width: 100%;
+}

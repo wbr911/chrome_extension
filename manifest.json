@@ -1,21 +1,53 @@
 {
-    "name": "MagicPasteChromeTool",
-    "version": "1.0",
-    "manifest_version": 2,
-    "description": "First extension",
-    "browser_action": {
-        "default_icon": "images/icon.png",
-        "default_popup": "popup.html"
-    },    
-    "content_scripts": [ {
-        "js": ["lib/jquery-1.11.2.js","lib/rangy-core.js","lib/rangy-classapplier.js","js/MarkApplier.js","js/TargetIdPopover.js" ,"js/TargetIdRecordList.js","content_script.js"  ],
-		"css":["lib/jquery-ui-1.11.2/jquery-ui.min.css", "css/content.css"],
-        "matches": [ "<all_urls>"]
-    } ],
-	"web_accessible_resources": [
-    "images/*","css/*"
+  "name": "MagicPasteChromeTool",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "First extension",
+  "icons":{
+    "48" :"images/icon-connected.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-connected.png",
+    "default_popup": "views/popup.html"
+  },
+  "background":{
+    "scripts":[ "lib/jquery-1.11.2.js","js/service/MP-Constants.js","js/service/ConfigurationService.js"]
+
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/jquery-1.11.2.js",
+        "lib/jquery-ui-1.11.2/jquery-ui.js",
+        "lib/rangy-core.js",
+        "lib/rangy-classapplier.js",
+        "js/service/MP-Constants.js",
+        "js/LoadingPanel.js",
+        "js/MarkApplier.js",
+        "js/TargetIdPopover.js",
+        "js/TargetIdRecordList.js",
+        "js/LayoutDefinitionDialog.js",
+        "js/service/LayoutDefinitionService.js",
+        "js/LayoutDefinitionDto.js",
+        "content_script.js"
+      ],
+      "css": [
+        "lib/jquery-ui-1.11.2/jquery-ui.min.css",
+        "css/common.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
   ],
-    "permissions" : [
-        "http://*/*","https://*/*","activeTab"
-            ]
+  "web_accessible_resources": [
+    "images/*",
+    "css/content.css"
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "activeTab",
+    "notifications",
+    "storage"
+  ]
 }
