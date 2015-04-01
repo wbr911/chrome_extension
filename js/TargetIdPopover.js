@@ -85,6 +85,7 @@ mp.TargetIdPopover.prototype.setData = function (dataArray) {
 };
 
 mp.TargetIdPopover.prototype.showPopoverMenuUnderSelectedNodes = function () {
+    var self = this;
     this.fetchItemList(function(){
         var left, top;
         var endContainer = document.getSelection().getRangeAt(0).endContainer;
@@ -93,11 +94,11 @@ mp.TargetIdPopover.prototype.showPopoverMenuUnderSelectedNodes = function () {
         }
         $endContainer = $(endContainer);
         var baseOffset = $endContainer.offset();
-        left = ($endContainer.width() / 2 + baseOffset.left) - this.popoverContainer.width() / 2;
+        left = ($endContainer.width() / 2 + baseOffset.left) - self.popoverContainer.width() / 2;
         top = $endContainer.height() + baseOffset.top;
-        this.popoverContainer.css("left", left);
-        this.popoverContainer.css("top", top);
-        this.popoverContainer.slideDown(200);
+        self.popoverContainer.css("left", left);
+        self.popoverContainer.css("top", top);
+        self.popoverContainer.slideDown(200);
     });
 
 };

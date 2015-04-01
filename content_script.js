@@ -46,7 +46,7 @@ $(function () {
         targetIdPopover = new mp.TargetIdPopover(markApplier);
         targetIdPopover.setTargetIdRecordList(targetIdRecordList);
         targetIdRecordList.setPopover(targetIdPopover);
-        buttonBar = $("<div id='buttonBar'></div>").append(selectionButton).append(generateButton).append(cancelButton).appendTo(targetIdRecordList.getContainer());
+        buttonBar = $("<div class='buttonBar'></div>").append(selectionButton).append(generateButton).append(cancelButton).appendTo($(document.body));
         layoutDefinitionService = new mp.service.LayoutDefinitionService();
         layoutDefinitionDialog = new mp.LayoutDefinitionDialog(layoutDefinitionService);
         generateButton.click(function (e) {
@@ -133,7 +133,7 @@ $(function () {
 
         var ignoreSpans = $(clonedSelectionRegion).find(".any");
         ignoreSpans.each(function (index, ignoreSpan) {
-            $(ignoreSpan).replaceWith($("<any></any>"));
+            $(ignoreSpan).remove();
         });
 
         $(clonedSelectionRegion).find(".selectionBackground").removeClass("selectionBackground");
@@ -156,6 +156,7 @@ $(function () {
         result = $(clonedSelectionRegion).html().replace(/\sclass=""/ig,"").replace(/(<img\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brPattern, "<br/>").replace(/(<col\b[^<>]*[^<>\/])>/ig, "$1 />").replace(brClosePattern, "");
         result = result.replace(newLinePattern, "");
         result = result.replace(anyPattern, "<any></any>");
+        //result = transferEscapedElement(result);
         //layoutDefinitionDialog.setLayoutDefinitionStr(formatForIndent(result));
         layoutDefinitionDialog.setLayoutDefinitionStr(formatForIndent(result));
         layoutDefinitionDialog.setServiceName("templates/customerregistration/customerregistration/fragment/input");
@@ -353,6 +354,10 @@ $(function () {
         $(event.target).removeClass("hoverBorder");
         event.stopPropagation();
 
+    }
+    function transferEscapedElement(htmlStr){
+        var temp = htmlStr.replace(/&amp;/g , "&");
+        return temp;
     }
     function formatForIndent(xml) {
         var formatted = '';

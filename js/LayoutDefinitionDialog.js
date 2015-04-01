@@ -20,6 +20,8 @@ mp.LayoutDefinitionDialog = function(layoutDefinitionService){
      */
     this.configureService = {};
     var self = this;
+    this.initElement();
+    this.enterDocument();
 };
 mp.LayoutDefinitionDialog.UPLOAD_STATUS_SUCCESS = "success";
 
@@ -29,7 +31,7 @@ mp.LayoutDefinitionDialog.prototype.initElement = function(){
     "<div class='mp-header mp-draggable'>Layout Definition </div>" +
     "<span id='mp-layoutDefinitionDialog-closeBtn' class='mp-icon mp-icon-right-corner mp-icon-close-grey'></span>" +
     "<textarea id='mp-layoutDefinitionDialog-content'></textarea>" +
-    "<input id = 'mp-layoutDefinitionDialog-descriptionInput' type ='text' placeholder='input the layout definition'>" +
+    "<input id = 'mp-layoutDefinitionDialog-descriptionInput' style='width: 80%' type ='text' placeholder='input the layout definition'>" +
     "<button id='mp-layoutDefinitionDialog-uploadBtn' class='mp-btn'>upload</button>" +
     "</div>").hide().draggable().appendTo($(document.body));
     this.loadingPanel = new mp.LoadingPanel(this.dialog);
@@ -126,7 +128,12 @@ mp.LayoutDefinitionDialog.prototype.showUploadingAnimation = function(){
 };
 
 mp.LayoutDefinitionDialog.prototype.show = function(){
-    this.dialog.show();
+    var self = this;
+    chrome.runtime.sendMessage({command:mp.service.Constants.COMMAND_DEFINITION_NAME},function(response){
+        self.descriptionInput.val(response.data);
+        self.dialog.show();
+    });
+
 };
 mp.LayoutDefinitionDialog.prototype.hide = function(){
     this.dialog.hide();

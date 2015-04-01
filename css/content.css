@@ -13,6 +13,9 @@
 .mp-chosen ,.mp-pop-targetIdItem .mp-chosen:hover{
     background-color:#99d6c5 ;
 }
+.buttonBar{
+    z-index: 1000;
+}
 .mp-btn{
     cursor: pointer;
     display: inline-block;
